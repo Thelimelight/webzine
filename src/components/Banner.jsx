@@ -1,19 +1,28 @@
 import { useState, useEffect } from "react";
 import { fetchLatestPosts } from "../services/api";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
 export default function BannerSlider() {
   const [ slides, setSlides ] = useState([])
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     console.log('Calling fetchLatestPosts...')
-    fetchLatestPosts().then((data) => {
-      console.log("Fetched slides:", data);
+    fetchLatestPosts()
+  .then((data) => {
+    console.log("Fetched slides:", data);
+    if (Array.isArray(data)) {
       setSlides(data);
-    })
-    .catch((err) => {
-      console.error('Fetch Error: ', err);
-    })
+    } else {
+      console.warn("Expected array but got:", data);
+      setSlides([]); // fallback to empty array
+    }
+  })
+  .catch((err) => {
+    console.error("Fetch Error: ", err);
+    setSlides([]); // fallback on error
+  });
   }, []);
 
   useEffect(() => {
@@ -31,9 +40,9 @@ export default function BannerSlider() {
   if(!currentSlide) return null 
   console.log("Current image: ", currentSlide.image)
 
-const imageUrl = `http://localhost:4000/uploads/${encodeURIComponent(currentSlide.image)}`;
+const imageUrl = `${API_BASE_URL}/uploads/${encodeURIComponent(currentSlide.image)}`;
   //  currentSlide.image
-  //   ? `http://localhost:4000/uploads/${currentSlide.image}`
+  //   ? `${API_BASE_URL}/uploads/${currentSlide.image}`
   //   : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fidea410.digital.uic.edu%2Fblog%2F&psig=AOvVaw1Zy6UXnkasUeUj8jsv29Vz&ust=1754874760363000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNDy0oeI_44DFQAAAAAdAAAAABAE"
 
 

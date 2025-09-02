@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
 export default function PostCard({ post }) {
   const navigate = useNavigate(); 
   return (
@@ -8,7 +10,7 @@ export default function PostCard({ post }) {
       {/* Image */}
       {post.image && (
         <img
-          src={`http://localhost:4000/uploads/${post.image}`}
+          src={`${API_BASE_URL}/uploads/${post.image}`}
           alt={post.title}
           className="h-48 w-full object-cover transition-transform duration-300 hover:scale-105"
         />

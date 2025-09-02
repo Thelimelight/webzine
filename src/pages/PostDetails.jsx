@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+
 export default function PostDetails () {
     const { id } = useParams();
     const [ post, setPost ] = useState(null);
@@ -13,7 +15,7 @@ export default function PostDetails () {
         setIsLoading(true);
         setError(null)
 
-        axios.get(`http://localhost:4000/post/${id}`)
+        axios.get(`${API_BASE_URL}/post/${id}`)
            .then(res => {
                setPost(res.data);
                setIsLoading(false);
@@ -58,7 +60,7 @@ export default function PostDetails () {
         
         {post.image && (
             <img
-                src={`http://localhost:4000/uploads/${post.image}`}
+                src={`${API_BASE_URL}/uploads/${post.image}`}
                 alt={post.title}
                 className="w-full h-80 object-cover"
             />
