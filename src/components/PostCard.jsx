@@ -10,9 +10,10 @@ export default function PostCard({ post }) {
       {/* Image */}
       {post.image && (
         <img
-          src={`/${API_BASE_URL}/uploads/${post.image}`}
+          src={`${API_BASE_URL}/uploads/${post.image}`}
           alt={post.title}
-          className="h-48 w-full object-cover transition-transform duration-300 hover:scale-105"
+          crossOrigin="anonymous"
+          className="h-48 w-full  transition-transform duration-300 hover:scale-105"
         />
       )}
 

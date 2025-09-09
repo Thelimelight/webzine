@@ -4,7 +4,7 @@ export default function AboutPage () {
   {/* Hero Section */}
   <section className="bg-[#a01446] text-white py-20 text-center">
     <div className="max-w-5xl mx-auto px-6">
-      <h1 className="text-5xl font-bold mb-4">About <span className="italic">The Limelight</span></h1>
+      <h1 className="text-5xl font-bold m b-4">About <span className="italic">The Limelight</span></h1>
       <p className="text-lg opacity-90 max-w-2xl mx-auto">
         A bimonthly webzine dedicated to inspiring stories, thoughtful insights, and diverse perspectives.
       </p>
@@ -27,13 +27,13 @@ export default function AboutPage () {
       <h3 className="text-2xl font-bold text-[#a01446] mb-4">Our Core Values</h3>
       <ul className="space-y-4 text-gray-700">
         <li className="flex items-start gap-3">
-          <span className="text-[#a01446] text-xl">📖</span> Quality writings that educates and inspires.
+          <span className="text-[#a01446] text-xl"></span> Quality writings that educates and inspires.
         </li>
         <li className="flex items-start gap-3">
-          <span className="text-[#a01446] text-xl">🌍</span> Representing diverse voices and cultures.
+          <span className="text-[#a01446] text-xl"></span> Representing diverse voices and cultures.
         </li>
         <li className="flex items-start gap-3">
-          <span className="text-[#a01446] text-xl">💡</span> Encouraging fresh perspectives and innovation.
+          <span className="text-[#a01446] text-xl"></span> Encouraging fresh perspectives and innovation.
         </li>
       </ul>
     </div>
