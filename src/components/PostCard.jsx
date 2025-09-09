@@ -13,7 +13,7 @@ export default function PostCard({ post }) {
           src={`${API_BASE_URL}/uploads/${post.image}`}
           alt={post.title}
           crossOrigin="anonymous"
-          className="h-48 w-full  transition-transform duration-300 hover:scale-105"
+          className="h-48 w-full transition-transform duration-300 hover:scale-105"
         />
       )}
 
