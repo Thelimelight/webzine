@@ -58,8 +58,7 @@
             style={{
               backgroundImage: `url(${imageUrl})`,
               backgroundSize: "cover",
-              backgroundPosition: "center",
-
+              backgroundPosition: "center"
             }}
           >
             <div className="absolute inset-0 bg-black/50"></div>

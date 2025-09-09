@@ -63,6 +63,7 @@ export default function PostDetails () {
                 src={`${API_BASE_URL}/uploads/${post.image}`}
                 alt={post.title}
                 className="w-full h-80 object-cover"
+                crossOrigin="anonymous"
             />
         )}
 
