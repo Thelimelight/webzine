@@ -56,9 +56,11 @@
           <article
             className="relative w-full h-[80vh] rounded-xl overflow-hidden"
             style={{
-              backgroundImage: `url(${imageUrl})`,
+              // backgroundImage: `url(${imageUrl})`,
               backgroundSize: "cover",
-              backgroundPosition: "center"
+              backgroundPosition: "center",
+              backgroundColor: "#a01446",
+              
             }}
           >
             <div className="absolute inset-0 bg-black/50"></div>
