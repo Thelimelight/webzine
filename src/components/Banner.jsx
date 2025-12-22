@@ -1,9 +1,9 @@
-  import { useState, useEffect } from "react";
-  import { fetchLatestPosts } from "../services/api";
+import { useState, useEffect } from "react";
+import { fetchLatestPosts } from "../services/api";
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
-  export default function BannerSlider() {
+export default function BannerSlider() {
     const [ slides, setSlides ] = useState([])
     const [current, setCurrent] = useState(0);
 
