@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { fetchPosts } from "../services/api"
+import { fetchPosts } from "../api/services/api"
 import PostCard from "../components/PostCard"
 import BannerSlider from "../components/Banner";
 

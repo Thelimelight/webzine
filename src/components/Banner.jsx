@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchLatestPosts } from "../services/api";
+import { fetchLatestPosts } from "../api/services/api";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
