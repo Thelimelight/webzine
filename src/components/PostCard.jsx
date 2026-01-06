@@ -1,48 +1,80 @@
-import { useNavigate } from "react-router-dom"
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+import { useNavigate } from "react-router-dom";
 
 export default function PostCard({ post }) {
-  const navigate = useNavigate(); 
-  return (
-    <div className="w-full max-w-sm mx-auto bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 mb-4 lg:mb-6">
+  const navigate = useNavigate();
 
-      {/* Image */}
-      {post.image && (
+  const imageUrl =
+    post.image?.url ||
+    post.image?.secure_url ||
+    "https://placehold.co/600x400?text=No+Image";
+
+  return (
+    <article className="w-full max-w-sm mx-auto bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300">
+      
+      {/* Image Section */}
+      <div className="relative h-52 overflow-hidden">
         <img
-          src={`${API_BASE_URL}/uploads/${post.image}`}
+          src={
+            post.image?.url ||
+            "https://placehold.co/600x400?text=No+Image"
+          }
           alt={post.title}
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
           crossOrigin="anonymous"
-          className="h-48 w-full transition-transform duration-300 hover:scale-105"
         />
-      )}
+
+        {/* Category Badge */}
+        {post.category?.name && (
+          <span className="absolute top-4 left-4 bg-[#a01446] text-white text-xs font-semibold px-3 py-1 rounded-md uppercase tracking-wide shadow">
+            {post.category.name}
+          </span>
+        )}
+      </div>
 
       {/* Content */}
       <div className="p-5">
-        {/* Category Tag */}
-        {post.category?.name && ( 
-        <span className="inline-block bg-[#a01446]/10 text-[#a01446] text-xs font-semibold px-3 py-1 rounded-full mb-3 uppercase tracking-wider">
-          {post.category.name}
-        </span>
-        )}
-
         {/* Title */}
-        <h2 className="text-lg font-bold text-gray-900 mb-2 leading-snug line-clamp-2 hover:text-[#a01446] transition-colors duration-200">
+        <h2
+          className="text-xl font-bold text-gray-900 leading-snug mb-3 hover:text-[#a01446] transition-colors cursor-pointer"
+          onClick={() => navigate(`/post/${post._id}`)}
+        >
           {post.title}
         </h2>
 
-        {/* Author */}
-        <p className="text-sm text-gray-500 mb-4">By {post.author}</p>
+        {/* Excerpt */}
+        {post.content && (
+          <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-5">
+            {post.content.replace(/<[^>]+>/g, "")}
+          </p>
+        )}
 
-        {/* Button */}
-        <button
-          className="w-full bg-[#a01446] hover:bg-[#851039] text-white font-medium py-2 px-4 rounded-lg transition-all duration-300"
-          onClick={() => navigate(`/post/${post._id}`)}
-        >
-          Read More →
-        </button>
+        <hr className="mb-4" />
+
+        {/* Footer */}
+        <div className="flex items-center justify-between text-sm text-gray-500">
+          <div className="flex items-center gap-2">
+            {post.author?.image?.url ? (
+              <img
+                src={post.author.image.url}
+                alt={post.author.name}
+                className="w-8 h-8 rounded-full object-cover"
+              />
+            ) : (
+              <div className="w-8 h-8 rounded-full bg-gray-300"></div>
+            )}
+
+            <span className="font-medium text-gray-700">
+              {post.author?.name}
+            </span>
+          </div>
+
+          {post.createdAt && (
+            <span>
+              {new Date(post.createdAt).toLocaleDateString()}
+            </span>
+          )}
+        </div>
       </div>
-    </div>
-
-  )
+    </article>
+  );
 }

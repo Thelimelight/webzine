@@ -1,46 +1,54 @@
-import { useState, useEffect } from "react"
-import { fetchPosts } from "../api/services/api"
-import PostCard from "../components/PostCard"
+import PostCard from "../components/PostCard";
 import BannerSlider from "../components/Banner";
+import { usePosts } from "../api/hooks/usePosts";
 
 export default function Home() {
-    const [ posts, setPosts ] = useState([]);
+  const { data: posts, isLoading, isError } = usePosts();
 
-    useEffect(() => {
-        const loadPost = async () => {
-            try {
-                const data = await fetchPosts();
-                console.log('Fetched posts: ', data)
-                setPosts(data);
-            }
-            catch(error) {
-                console.error('Failed to fetch posts: ', error); 
-            }
-        }
-        loadPost();
-    }, []);
-
+  if (isLoading) {
     return (
-        <main>
+      <main>
         <BannerSlider />
-        <div className="max-w-7xl mx-auto px-4 ">
-            <h1 className="text-3xl lg:m-5 m-4 font-bold text-gray-900">
-                Latest Writings 
-            </h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {posts.map((post) => {
-                    try {
-                        return <PostCard key={post._id} post={post} />;
-                    } catch (err) {
-                        console.error("PostCard error:", err);
-                        return null;
-                    }
-                })}
-
-            </div>
+        <div className="max-w-7xl mx-auto px-4 py-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={i}
+                className="h-80 bg-gray-200 rounded-xl animate-pulse"
+              />
+            ))}
+          </div>
         </div>
-        </main>
-    )
-}
+      </main>
+    );
+  }
 
-// className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4"
+  if (isError) {
+    return (
+      <main>
+        <BannerSlider />
+        <div className="max-w-7xl mx-auto px-4 py-10 text-red-500">
+          Failed to load posts
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main>
+      <BannerSlider />
+
+      <div className="max-w-7xl mx-auto px-4">
+        <h1 className="text-3xl lg:m-5 m-4 font-bold text-gray-900">
+          Latest Writings
+        </h1>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts?.map((post) => (
+            <PostCard key={post._id} post={post} />
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
